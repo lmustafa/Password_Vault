@@ -1,0 +1,133 @@
+****************************************************
+Laiba Mustafa		 1031269
+CIS*2520		     Assignment 2
+21/06/2018			 lmustafa@uoguelph.ca
+****************************************************
+
+************************
+Program Description
+************************
+My program creates a password vault for a single user. The vault created is called
+vault.bin, there are many operations provided for the user to perform by displaying
+useful prompts. The user can add keys and passwords into the vault, they can then
+change, retrieve, or delete passwords. All the keys/passwords are then stored into
+the file so the user can access and manage them anytime. A more detailed explanation
+can be found below.
+
+The hash function was taken from this website: http://www.cs.yale.edu/homes/aspnes/classes/223/notes.html#hashTables
+It is similar to one presented in the References provided by the teacher.
+
+************************
+ To compile this code:
+ run: make
+
+ To compile test:
+ run: make test
+************************
+
+***************************************
+  How to run for every Makefile options.
+
+  To run main simulation:
+  run: bin/run
+
+  To run test:
+  run: bin/test
+
+  To run cppcheck:
+  run: make cppcheck
+
+  To run clean:
+  run: make clean
+***************************************
+
+---------------------------------------------
+Big O complexity of Hash Table API functions:
+
+void insertData(HTable *hashTable, char *identifier, void *data): O(1)
+- The size of the hash table does not matter because the key will always hash to the same
+  place every time, and access it directly
+- The complexity is independent from the size of the input and the hash algorithm always returns
+  the same value, therefore insertData runs in constant time
+
+void removeData(HTable *hashTable, char *identifier): O(1)
+- This function removes data stored in the hash table, it accesses that data directly
+  by using the identifier and the hash function
+- The algorithm runs in constant time because it reaches what needs to be removed directly
+
+void *lookupData(HTable *hashTable, char *identifier): O(1)
+- The size of the hash table does not matter because the key will always hash to the same spot every time
+- Therefore, the algorithm runs in constant time and the complexity is O(1)
+
+-----------------------------------------------------
+Program Description:
+
+The size of every buffer is 200, keys/password/anything that the user is asked
+to enter. This seems like a reasonable limit.
+
+The password vault works for one user. When the program is run, this will appear:
+
+Menu
+1. Create new vault
+2. Manage existing vault
+q. Exit
+Option selected:
+
+If the user selects 1, then very first time that a user uses this program,
+it will create a file called vault.bin, and the user will set a program password later used to access
+the program. Every time after the first, the user must first correctly input the
+program password.
+
+If the user selects 1 again, then a message will display: 'A password vault already exists.' And
+the user must enter the program password. If the password is incorrect then program will
+return to the menu. If the password is correct, then it will display:
+
+    If you create a new file, the contents of the old file will be lost
+    Do you wish to continue?
+    YES - 'y'
+    NO  - 'n'
+
+A warning appears. 'n' will return the user to the menu. And 'y' will make the user
+enter a new program password.
+
+If the user selects 2, then they must first enter the program password (if a file exists, if it does not
+then they will be asked to first create a file). If the program password is incorrect, then
+a message will display: "Incorrect Password. You do not have access to this file." Else, they will
+see:
+
+    What would you like to do:
+    1. Add new password
+    2. Change existing key
+    3. Change existing password
+    4. Change Program Password
+    5. Retrieve a password
+    6. Delete a password
+    q. Exit
+    Option selected:
+
+The user will then select the option that does what they want to do. If they input something
+else a message will display: "Invalid Input. Try Again." The user can add a new password
+by entering '1', which will then ask them to provide a key and a password. If the key entered
+already exits in the vault a message will display:
+
+    A password already exists for this key.
+    If you wish to change a password press '2'.
+
+If the user enters 2,3,5, or 6, then first the program will display the following:
+
+    List of keys currently in vault:
+    KEY: (current key in vault)
+
+and the user will be asked to enter the key whose password they want to change/retrieve/or delete.
+If the user enters a string that does not exist in the vault then a message will
+display that says 'Key does not exist.' The user is not shown that Program Password is in the
+vault and even if they do type ProgramPassword, they will not be able to modify it. The only
+time when Program Password is displayed is in retrieve password, because there's no reason to hide
+it then.
+
+If the use enters 4, then a message will display that says 'Change Program Password' and asks
+the user to enter the new password (perhaps allowing Program Password in the retrieval function
+is useful if the user immediately forgets the program password they entered).
+
+When the user if done, they can enter 'q' to exit. Which will return them to the menu. If they
+want to exit the menu, they must simply press 'q' again.
