@@ -1,9 +1,3 @@
-****************************************************
-Laiba Mustafa		 1031269
-CIS*2520		     Assignment 2
-21/06/2018			 lmustafa@uoguelph.ca
-****************************************************
-
 ************************
 Program Description
 ************************
@@ -13,9 +7,6 @@ useful prompts. The user can add keys and passwords into the vault, they can the
 change, retrieve, or delete passwords. All the keys/passwords are then stored into
 the file so the user can access and manage them anytime. A more detailed explanation
 can be found below.
-
-The hash function was taken from this website: http://www.cs.yale.edu/homes/aspnes/classes/223/notes.html#hashTables
-It is similar to one presented in the References provided by the teacher.
 
 ************************
  To compile this code:
@@ -41,25 +32,6 @@ It is similar to one presented in the References provided by the teacher.
   run: make clean
 ***************************************
 
----------------------------------------------
-Big O complexity of Hash Table API functions:
-
-void insertData(HTable *hashTable, char *identifier, void *data): O(1)
-- The size of the hash table does not matter because the key will always hash to the same
-  place every time, and access it directly
-- The complexity is independent from the size of the input and the hash algorithm always returns
-  the same value, therefore insertData runs in constant time
-
-void removeData(HTable *hashTable, char *identifier): O(1)
-- This function removes data stored in the hash table, it accesses that data directly
-  by using the identifier and the hash function
-- The algorithm runs in constant time because it reaches what needs to be removed directly
-
-void *lookupData(HTable *hashTable, char *identifier): O(1)
-- The size of the hash table does not matter because the key will always hash to the same spot every time
-- Therefore, the algorithm runs in constant time and the complexity is O(1)
-
------------------------------------------------------
 Program Description:
 
 The size of every buffer is 200, keys/password/anything that the user is asked
